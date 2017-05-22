@@ -25,12 +25,12 @@ public class Member
         return name;
     }
 
-    public void setBirthyear(int birthyear)
+    public void setBirthYear(int birthyear)
     {
         this.birthyear = birthyear;
     }
 
-    public int getBirthyear()
+    public int getBirthYear()
     {
         return birthyear;
     }
