@@ -2,9 +2,13 @@ public class Menu{
     private UserInput input = new UserInput();
     private Database db = new Database();
 
+    // Starter method ----------------------------------------------------------------------
+
     public void start(){
         menuRunner("mainMenu");
     }
+
+    // MENUS -------------------------------------------------------------------------------
 
     private Boolean mainMenu(){
         String[] menuOptions = {"Main Menu","Accountant Menu","Chairman Menu","Coach Menu"};
@@ -36,10 +40,10 @@ public class Menu{
                 addMemberMenu();
                 break;
             case 2:
-                editMemberMenu();
+                db.editMember(db.pickMember());
                 break;
             case 3:
-                removeMemberMenu();
+                db.deleteMember(db.pickMember());
                 break;
             default: 
         }
@@ -47,14 +51,13 @@ public class Menu{
     }
 
     private Boolean coachMenu(){
+        String[] menuOptions = {"Coach Menu","Add Performance"};
+        printOptions(menuOptions);
         switch(input.getInt()){
-             case 0: 
+            case 0: 
                 return null;
             case 1:
-                break;
-            case 2:
-                break;
-            case 3:
+                db.pickCS().addPerformance();
                 break;
             default: 
         }
@@ -62,26 +65,19 @@ public class Menu{
     }
 
     private Boolean accountantMenu(){
-        switch(input.getInt()){
-            case 0: 
-                return null;
-            case 1:
-                return true;
-            case 2:
-                return true;
-            case 3:
-                return true;
-            default: 
-                return true;
-        }
+        System.out.println("Now viewing members with a due payment!");
+        db.printDueMembers();
+        return true;
     }
+
+    // Utility methods -------------------------------------------------------------------------------
 
     private void printOptions(String[] options){
         System.out.println(options[0]);
         System.out.println("Options:");
         System.out.println("0: Go back/exit.");
         for(int i = 1; i < options.length; i++){
-            System.out.println(i + options[i]);
+            System.out.println(i + ": " + options[i]);
         }
     }
 
@@ -104,6 +100,8 @@ public class Menu{
             }
         }
     }
+
+    // Actions MÅSKE skal alt dette være i de enkelte klasser?   ---------
 
     private void addMemberMenu(){
         System.out.println("Adding new member.");
@@ -139,10 +137,21 @@ public class Menu{
     }
 
     private void editMemberMenu(){
-
+            db.findMember();
     }
 
-    private void removeMemberMenu(){
+// NEEDS USING
+    private void memberPropertyMenu(){
+        String[] options = {"What would you like to edit?", 
+                            "Name", 
+                            "Birthyear", 
+                            "Residence", 
+                            "Membership status (Active/Passive)"};
+        printOptions(options);
+    }
+
+    private void deleteMemberMenu(){
+        db.deleteMember(db.findMember());
         
     }
 }
