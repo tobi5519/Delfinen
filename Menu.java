@@ -103,7 +103,7 @@ public class Menu{
 
     // Actions MÅSKE skal alt dette være i de enkelte klasser?   ---------
 
-    private void addMemberMenu(){
+    private void addMember(){
         System.out.println("Adding new member.");
 
         System.out.println("Name: ");
@@ -136,7 +136,7 @@ public class Menu{
         }
     }
 
-    private void editMemberMenu(){
+    private void editMember(){
             db.findMember();
     }
 
@@ -150,7 +150,7 @@ public class Menu{
         printOptions(options);
     }
 
-    private void deleteMemberMenu(){
+    private void deleteMember(){
         db.deleteMember(db.findMember());
         
     }
