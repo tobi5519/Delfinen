@@ -1,16 +1,16 @@
 public class Member
 {
     protected String name;
-    protected int birthyear;
+    protected int birthYear;
     protected String residence;
     protected int id;
     protected boolean memberStatus;
     protected boolean paymentStatus;
 
-    public Member(String name, int birthyear, String residence)
+    public Member(String name, int birthYear, String residence)
     {
         this.name = name;
-        this.birthyear = birthyear;
+        this.birthYear = birthYear;
         this.residence = residence;
     }
 
@@ -25,14 +25,14 @@ public class Member
         return name;
     }
 
-    public void setBirthYear(int birthyear)
+    public void setBirthYear(int birthYear)
     {
-        this.birthyear = birthyear;
+        this.birthYear = birthYear;
     }
 
     public int getBirthYear()
     {
-        return birthyear;
+        return birthYear;
     }
 
     public void setResidence(String residence)
