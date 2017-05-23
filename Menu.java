@@ -136,11 +136,18 @@ public class Menu{
 
     private void editMember(){
             System.out.println("What member would you like to edit?");
-            // db.findMember(input.getLine("Name")); FEJL FRA TOBI
+            int[] memberIndex = db.findMember(input.getLine("Name"));
+            if(memberIndex[0] == 0){
+                Member placeholder = db.getMember(memberIndex[1]);
+            } else if (memberIndex[0] == 1){
+                CompetitiveSwimmer placeholder = db.getCompetitiveSwimmer(memberIndex[1]);
+            } else if (memberIndex[0] == -1){
+                System.out.println("Member not found");
+            }
     }
 
 // NEEDS USING
-    private void memberPropertyMenu(){
+    private void chooseProperty(){
         String[] options = {"What would you like to edit?", 
                             "Name", 
                             "Birthyear", 
@@ -150,7 +157,7 @@ public class Menu{
     }
 
     private void deleteMember(){
-        db.deleteMember(db.findMember());
+        db.deleteMember(db.findMember(input.getLine()));
         
     }
 }
