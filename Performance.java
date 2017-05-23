@@ -44,7 +44,7 @@ public class Performance
     @Override
     public String toString()
     {
-        return "Navn: " + name + " " + "alder: " + age + " " + "Tid: " + " " + time + "Diciplin: " + " " + dicipline;
+        return "Navn: " + name + " " + "alder: " + age + " " + "Tid: " + " " + time + "Diciplin: " + " " + dicipline +
      "sted: " + " " + location;
     }
 }
