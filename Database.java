@@ -209,7 +209,8 @@ public class Database
 		for(Member m : members)
 		{
 			if(m.getName().equals(name))
-			{				
+			{			
+				System.out.println("Hej fra member");	
 				a[0] = 0;
 				a[1] = members.indexOf(m);
 				return a;
@@ -221,6 +222,7 @@ public class Database
 		{
 			if(cs.getName().equals(name))
 			{
+				System.out.println("Hej fra cs member");	
 				a[0] = 1;
 				a[1] = competitiveSwimmers.indexOf(cs);
 				return a;

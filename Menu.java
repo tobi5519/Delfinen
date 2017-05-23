@@ -15,7 +15,7 @@ public class Menu{
         printOptions(menuOptions);
         switch(input.getInt()){
             case 0: 
-                return null;
+                return false;
             case 1:
                 menuRunner("accountantMenu");
                 return true;
@@ -35,12 +35,12 @@ public class Menu{
         printOptions(menuOptions);
         switch(input.getInt()){
             case 0: 
-                return null;
+                return false;
             case 1:
                 addMember();
                 break;
             case 2:
-                //edit
+                editMember();
                 break;
             case 3:
                 //delete
@@ -55,7 +55,7 @@ public class Menu{
         printOptions(menuOptions);
         switch(input.getInt()){
             case 0: 
-                return null;
+                return false;
             case 1:
                 //add performance
                 break;
@@ -67,7 +67,7 @@ public class Menu{
     private Boolean accountantMenu(){
         System.out.println("Now viewing members with a due payment!");
         db.printDueMembers();
-        return true;
+        return false;
     }
 
     // Utility methods -------------------------------------------------------------------------------
@@ -123,7 +123,7 @@ public class Menu{
                 db.addMember(new Member(name, birthYear, address));
                 return true;
             } else if ( selection == 2){
-                // db.addCS(new CompetitiveSwimmer(name, birthYear, address));
+                db.addCompetitiveSwimmer(new CompetitiveSwimmer(name, birthYear, address));
                 return true;
             } else if (selection == 0) {
                 System.out.println("Exiting, no member added.");
@@ -137,27 +137,54 @@ public class Menu{
     private void editMember(){
             System.out.println("What member would you like to edit?");
             int[] memberIndex = db.findMember(input.getLine("Name"));
+            Member placeholder = null;
             if(memberIndex[0] == 0){
-                Member placeholder = db.getMember(memberIndex[1]);
+                placeholder = db.getMember(memberIndex[1]);
             } else if (memberIndex[0] == 1){
-                CompetitiveSwimmer placeholder = db.getCompetitiveSwimmer(memberIndex[1]);
+                System.out.println("Adding competitive swimmer");
+                placeholder = db.getCompetitiveSwimmer(memberIndex[1]);
             } else if (memberIndex[0] == -1){
                 System.out.println("Member not found");
             }
+
+
+
+            if(placeholder != null){
+                Boolean running = true;
+                while(running){
+                    switch(chooseProperty(
+                            placeholder.getName(), 
+                            placeholder.getAge(), 
+                            placeholder.getResidence(), 
+                            placeholder.getMemberStatus()))
+                            {
+                                case 0:
+                                break;
+                    }
+                }
+                
+            }
+
     }
 
 // NEEDS USING
-    private void chooseProperty(){
+    private int chooseProperty(String name, int age, String residence, Boolean membership){
+        String membershipTitle = "Passive";
+        if(membership){
+            membershipTitle = "Active";
+        }
         String[] options = {"What would you like to edit?", 
-                            "Name", 
-                            "Birthyear", 
-                            "Residence", 
-                            "Membership status (Active/Passive)"};
+                            "Name: " + name, 
+                            "Birthyear: " + age, 
+                            "Residence: " + residence, 
+                            "Membership status (Active/Passive): " + membershipTitle};
         printOptions(options);
+        return input.getInt();
     }
+    
 
     private void deleteMember(){
-        db.deleteMember(db.findMember(input.getLine()));
-        
+        // db.findMember(input.getLine())
+        // db.deleteMember();
     }
 }
