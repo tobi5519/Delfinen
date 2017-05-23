@@ -1,11 +1,11 @@
 public class Member
 {
-    protected String name;
-    protected int age;
-    protected String residence;
-    protected int id;
-    protected boolean memberStatus;
-    protected boolean paymentStatus;
+    private String name;
+    private int age;
+    private String residence;
+    private int id;
+    private boolean memberStatus;
+    private boolean paymentStatus;
 
     public Member(String name, int age, String residence)
     {
