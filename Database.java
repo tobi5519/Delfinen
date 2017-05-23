@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 public class Database
 {
 	private ArrayList<Member> members = new ArrayList<Member>();
@@ -99,21 +100,48 @@ public class Database
 		seniorButterfly = sort(seniorButterfly);
 		seniorCrawl = sort(seniorCrawl);
 		
-
-
+		for(Performance p : juniorButterfly)
+		{	
+			System.out.println("= = | Junior performances in butterfly | = =");
+			System.out.println(p);
+		}
+		for(Performance p : juniorCrawl)
+		{
+			System.out.println("= = | Junior performances in crawl | = =");
+			System.out.println(p);
+		}
+		for(Performance p : seniorButterfly)
+		{
+			System.out.println("= = | Senior performances in butterfly | = =");
+			System.out.println(p);
+		}
+		for(Performance p : seniorCrawl)
+		{
+			System.out.println("= = | Senior performances in crawl | = =");
+			System.out.println(p);
+		}
 				
 	}
 
-	public void sort(ArrayList<Performance> arraylist)
+	public ArrayList<Performance> sort(ArrayList<Performance> arraylist)
 	{
-		ArrayList<Performance> allPerformances = new ArrayList<Performance>();
-		
 		if(arraylist = null || arraylist.size() < 2) return;
+		Boolean swappedLastTime = true;
+		while (swappedLastTime) {
+			
+			swappedLastTime = false;
+			for(int i = 0;i < arraylist.size();i++)
+			{
+				
+				if(arraylist.get(i) > arraylist.get(i+1)
+				{
+					Collections.swap(ArrayList<Performance> arraylist, i, i+1);
+					swappedLastTime = true;
+				}
 
-		
-
-
-
+			}
+		}
+		return arraylist;
 	}
 	
 	
