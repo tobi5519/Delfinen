@@ -203,11 +203,35 @@ public class Database
 		competitiveSwimmers.add(cs);
 	}
 		
-	public int findMember()
+	public int[] findMember(String name)
 	{
-		// prompt for input
-		return 0;
+		int[] a = new int[2];
+		for(Member m : members)
+		{
+			if(m.getName().equals(name))
+			{				
+				a[0] = 0;
+				a[1] = members.indexOf(m);
+				return a;
+			}
+			
+		}
+
+		for(CompetitiveSwimmer cs : competitiveSwimmers)
+		{
+			if(cs.getName().equals(name))
+			{
+				a[0] = 1;
+				a[1] = competitiveSwimmers.indexOf(cs);
+				return a;
+			}
+		}
+		
+		a[0] = -1;
+		return a;
 	}
+
+
 	
 	public void deleteMember(int memberindex)
 	{
