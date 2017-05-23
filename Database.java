@@ -9,20 +9,64 @@ public class Database
 	{
 		for(Member m : members)
 		{
-			if (m.getBirthyear() < 18)
+			if (m.getPaymentStatus = false)
 			{
+				if (m.getMemberStatus = true)
+				{
+					if (m.getAge() < 18)
+					{
+						System.out.println("1000 kr. is due");
+					}	
+					else if(m.getAge() >= 18 && m.getAge() < 60)
+					{
+						System.out.println("1600 kr. is due");
+						
+					}
+					else
+					{
+						System.out.println("1200 kr. is due");
+						
+					}
+				}
+				else
+				{
+					System.out.println("500 kr. is due");
 					
+				}
 			}
-			System.out.println(m.getName() + " is overdue");
-			
 		}
+	}
 
+	public void printDueCompetitiveSwimmers()
+	{
 		for(CompetitiveSwimmer cs : competitiveSwimmers)
 		{
-			System.out.println(cs.getName() + " is overdue");
-			
+			if (cs.getPaymentStatus = false)
+			{
+				if (cs.getMemberStatus = true)
+				{
+					if (cs.getAge() < 18)
+					{
+						System.out.println("1000 kr. is due");
+					}	
+					else if(cs.getAge() >= 18 && cs.getAge() < 60)
+					{
+						System.out.println("1600 kr. is due");
+						
+					}
+					else
+					{
+						System.out.println("1200 kr. is due");
+						
+					}
+				}
+				else
+				{
+					System.out.println("500 kr. is due");
+					
+				}
+			}
 		}
-
 	}
 
 	public void printMembers()
@@ -125,15 +169,19 @@ public class Database
 
 	public ArrayList<Performance> sort(ArrayList<Performance> arraylist)
 	{
-		if(arraylist = null || arraylist.size() < 2) return;
+		if(arraylist = null || arraylist.size() < 2)
+		{
+			return;
+		}
+
 		Boolean swappedLastTime = true;
-		while (swappedLastTime) {
-			
+		while (swappedLastTime) 
+		{
 			swappedLastTime = false;
 			for(int i = 0;i < arraylist.size();i++)
 			{
 				
-				if(arraylist.get(i) > arraylist.get(i+1)
+				if(arraylist.get(i) > arraylist.get(i+1))
 				{
 					Collections.swap(ArrayList<Performance> arraylist, i, i+1);
 					swappedLastTime = true;
@@ -150,7 +198,11 @@ public class Database
 	{
 		members.add(member);
 	}
-	
+	public void addCompetitiveSwimmer(CompetitiveSwimmer cs)
+	{
+		competitiveSwimmers.add(cs);
+	}
+		
 	public int findMember()
 	{
 		// prompt for input
