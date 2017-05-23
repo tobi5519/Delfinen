@@ -136,7 +136,7 @@ public class Menu{
 
     private void editMember(){
             System.out.println("What member would you like to edit?");
-            db.findMember(input.getLine("Name"));
+            // db.findMember(input.getLine("Name")); FEJL FRA TOBI
     }
 
 // NEEDS USING
