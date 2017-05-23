@@ -113,6 +113,7 @@ public class Database
 	public int findMember()
 	{
 		// prompt for input
+		return 0;
 	}
 	
 	public void deleteMember(int memberindex)
