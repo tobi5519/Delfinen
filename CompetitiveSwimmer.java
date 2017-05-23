@@ -11,7 +11,7 @@ public class CompetitiveSwimmer extends Member
         super(name, birthyear, residence); 
     }
     
-     public ArrayList<Performance> getPerformance()
+     public ArrayList<Performance> getPerformances()
      {
           return performances;
      }
