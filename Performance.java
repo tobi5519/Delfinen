@@ -3,9 +3,10 @@ public class Performance
     private String location;
     private long time;
     private String dicipline;
+    private String name;
 
 
-    public Performance(String location, long time, String dicipline)
+    public Performance(String location, long time, String dicipline, String name)
     {
         this.location = location;
         this.time = time;
