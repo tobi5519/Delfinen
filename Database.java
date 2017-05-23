@@ -8,6 +8,10 @@ public class Database
 	{
 		for(Member m : members)
 		{
+			if (m.getBirthyear() < 18)
+			{
+					
+			}
 			System.out.println(m.getName() + " is overdue");
 			
 		}
@@ -36,68 +40,77 @@ public class Database
 
 	}
 
-	public void printTopFive()
+	public ArrayList<Performance> getAllPerformances()
 	{
-		ArrayList<CompetitiveSwimmer> juniorCrawl = new ArrayList<CompetitiveSwimmer>();
-		ArrayList<CompetitiveSwimmer> juniorButterfly = new ArrayList<CompetitiveSwimmer>();
+		ArrayList<Performance> allPerformances = new ArrayList<Performance>();
 
-		ArrayList<CompetitiveSwimmer> seniorCrawl = new ArrayList<CompetitiveSwimmer>();
-		ArrayList<CompetitiveSwimmer> seniorButterfly = new ArrayList<CompetitiveSwimmer>();
-
-		// Sorting the swimmers in arraylists according to agegroup and discipline
 		for(CompetitiveSwimmer cs : competitiveSwimmers)
 		{
-			if (cs.getBirthyear() < 18)
+			for(Performance p : cs.getPerformances())
 			{
-				for(Performance p : cs.getPerformance())
+				allPerformances.add(p);
+			}
+									
+		}
+		return allPerformances;
+		
+	}
+	
+	
+	public void printTopFive()
+	{
+		ArrayList<Performance> performances = getAllPerformances();
+
+		ArrayList<Performance> juniorCrawl = new ArrayList<Performance>();
+		ArrayList<Performance> juniorButterfly = new ArrayList<Performance>();
+
+		ArrayList<Performance> seniorCrawl = new ArrayList<Performance>();
+		ArrayList<Performance> seniorButterfly = new ArrayList<Performance>();
+
+		for(Performance p : performances)
+		{
+			if (p.getAge() < 18)
+			{
+				if(p.getDicipline().equals("butterfly"))
+				{	
+					juniorButterfly.add(p);
+				}
+				else
 				{
-					if(cs.getPerformance().getDicipline().equals("butterfly"))
-					{
-						juniorButterfly.add(cs);
-					}
-					else
-					{
-						juniorCrawl.add(cs);
-					}
+					juniorCrawl.add(p);
 				}
 			}
 			else
 			{
-				for(Performance p : cs.getPerformance())
+				if(p.getDicipline().equals("butterfly"))
+				{	
+					seniorButterfly.add(p);
+				}
+				else
 				{
-					if(cs.getPerformance().getDicipline().equals("butterfly"))
-					{
-						seniorButterfly.add(cs);
-					}
-					else
-					{
-						seniorCrawl.add(cs);
-					}
+					seniorCrawl.add(p);
 				}
 			}
 		}
 
 		// Sorting each arraylist after 
-		sort(juniorButterfly);
-		sort(juniorCrawl);
-		sort(seniorButterfly);
-		sort(seniorCrawl);
+		juniorButterfly = sort(juniorButterfly);
+		juniorCrawl = sort(juniorCrawl);
+		seniorButterfly = sort(seniorButterfly);
+		seniorCrawl = sort(seniorCrawl);
 		
 
 
 				
 	}
 
-	public void sort(ArrayList<CompetitiveSwimmer> arraylist)
+	public void sort(ArrayList<Performance> arraylist)
 	{
-		// Overvej bubble, sort i stedet for quick sort !!!df
-
+		ArrayList<Performance> allPerformances = new ArrayList<Performance>();
+		
 		if(arraylist = null || arraylist.size() < 2) return;
 
-		int mid = arraylist.size() / 2;
-		long pivot = arraylist.get(mid).getTime();
-
-		// Please Kill Me!
+		
 
 
 
@@ -132,7 +145,7 @@ public class Database
 		
 	}
 	
-	public CompetitiveSwimmer getCS(int memberindex)
+	public CompetitiveSwimmer getCompetitiveSwimmer(int memberindex)
 	{
 		return competitiveSwimmers.get(memberindex);
 	}
