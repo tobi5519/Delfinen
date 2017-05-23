@@ -9,9 +9,9 @@ public class Database
 	{
 		for(Member m : members)
 		{
-			if (m.getPaymentStatus = false)
+			if (m.getPaymentStatus() == false)
 			{
-				if (m.getMemberStatus = true)
+				if (m.getMemberStatus() == true)
 				{
 					if (m.getAge() < 18)
 					{
@@ -41,9 +41,9 @@ public class Database
 	{
 		for(CompetitiveSwimmer cs : competitiveSwimmers)
 		{
-			if (cs.getPaymentStatus = false)
+			if (cs.getPaymentStatus() == false)
 			{
-				if (cs.getMemberStatus = true)
+				if (cs.getMemberStatus() == true)
 				{
 					if (cs.getAge() < 18)
 					{
@@ -73,13 +73,13 @@ public class Database
 	{
 		for(Member m : members)
 		{
-			System.out.println(m.getName() + " " + m.getBirthYear());
+			System.out.println(m.getName() + " " + m.getAge());
 			
 		}
 
 		for(CompetitiveSwimmer cs : competitiveSwimmers)
 		{
-			System.out.println(cs.getName() + " " + cs.getBirthYear());
+			System.out.println(cs.getName() + " " + cs.getAge());
 			
 		}
 
@@ -169,9 +169,9 @@ public class Database
 
 	public ArrayList<Performance> sort(ArrayList<Performance> arraylist)
 	{
-		if(arraylist = null || arraylist.size() < 2)
+		if(arraylist.size() < 2)
 		{
-			return;
+			return null;
 		}
 
 		Boolean swappedLastTime = true;
@@ -181,9 +181,9 @@ public class Database
 			for(int i = 0;i < arraylist.size();i++)
 			{
 				
-				if(arraylist.get(i) > arraylist.get(i+1))
+				if(arraylist.get(i).getTime() > arraylist.get(i+1).getTime())
 				{
-					Collections.swap(ArrayList<Performance> arraylist, i, i+1);
+					Collections.swap(arraylist, i, i+1); // works without "ArrayList<Performance>"
 					swappedLastTime = true;
 				}
 
@@ -228,7 +228,5 @@ public class Database
 	public CompetitiveSwimmer getCompetitiveSwimmer(int memberindex)
 	{
 		return competitiveSwimmers.get(memberindex);
-	}
-		}
-		
+	}	
 }
