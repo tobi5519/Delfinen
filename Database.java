@@ -36,16 +36,74 @@ public class Database
 
 	}
 
-	// Wow much fucked it is.
-	// Sorting algorithm
 	public void printTopFive()
 	{
-		ArrayList<CompetitiveSwimmer> topfive = new ArrayList<CompetitiveSwimmer>();
+		ArrayList<CompetitiveSwimmer> juniorCrawl = new ArrayList<CompetitiveSwimmer>();
+		ArrayList<CompetitiveSwimmer> juniorButterfly = new ArrayList<CompetitiveSwimmer>();
+
+		ArrayList<CompetitiveSwimmer> seniorCrawl = new ArrayList<CompetitiveSwimmer>();
+		ArrayList<CompetitiveSwimmer> seniorButterfly = new ArrayList<CompetitiveSwimmer>();
+
+		// Sorting the swimmers in arraylists according to agegroup and discipline
+		for(CompetitiveSwimmer cs : competitiveSwimmers)
+		{
+			if (cs.getBirthyear() < 18)
+			{
+				for(Performance p : cs.getPerformance())
+				{
+					if(cs.getPerformance().getDicipline().equals("butterfly"))
+					{
+						juniorButterfly.add(cs);
+					}
+					else
+					{
+						juniorCrawl.add(cs);
+					}
+				}
+			}
+			else
+			{
+				for(Performance p : cs.getPerformance())
+				{
+					if(cs.getPerformance().getDicipline().equals("butterfly"))
+					{
+						seniorButterfly.add(cs);
+					}
+					else
+					{
+						seniorCrawl.add(cs);
+					}
+				}
+			}
+		}
+
+		// Sorting each arraylist after 
+		sort(juniorButterfly);
+		sort(juniorCrawl);
+		sort(seniorButterfly);
+		sort(seniorCrawl);
 		
 
 
-		
+				
 	}
+
+	public void sort(ArrayList<CompetitiveSwimmer> arraylist)
+	{
+		// Overvej bubble, sort i stedet for quick sort !!!df
+
+		if(arraylist = null || arraylist.size() < 2) return;
+
+		int mid = arraylist.size() / 2;
+		long pivot = arraylist.get(mid).getTime();
+
+		// Please Kill Me!
+
+
+
+	}
+	
+	
 	
 	public void addMember(Member member)
 	{
@@ -59,9 +117,12 @@ public class Database
 	
 	public void deleteMember(int memberindex)
 	{
-		// both member and competitive swimmers?
-
 		members.remove(memberindex);
+	}
+
+	public void deleteCompetitiveSwimmer(int memberindex)
+	{
+		competitiveSwimmers.remove(memberindex);
 	}
 	
 	public Member getMember(int memberindex)
@@ -74,5 +135,6 @@ public class Database
 	{
 		return competitiveSwimmers.get(memberindex);
 	}
+		}
 		
 }
