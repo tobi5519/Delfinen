@@ -4,13 +4,15 @@ public class Performance
     private long time;
     private String dicipline;
     private String name;
+    private int age;
 
 
-    public Performance(String location, long time, String dicipline, String name)
+    public Performance(String location, long time, String dicipline, String name, int age)
     {
         this.location = location;
         this.time = time;
         this.dicipline = dicipline;
+        this.age = age;
     }
 
     public String getLocation()
@@ -26,6 +28,16 @@ public class Performance
     public String getDicipline()
     {
         return dicipline;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+    
+    public int getAge()
+    {
+        return age;
     }
 
     @Override
