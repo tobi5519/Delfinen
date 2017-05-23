@@ -97,6 +97,9 @@ public class Menu{
                 case "coachMenu":
                     running = coachMenu();
                     break;
+                case "addMember":
+                    running = addMember();
+                break;
             }
         }
     }
@@ -105,35 +108,30 @@ public class Menu{
 
     private void addMember(){
         System.out.println("Adding new member.");
-
-        System.out.println("Name: ");
-        String name = input.getLine();
-        
-        System.out.println("Birthyear: ");
-        int birthYear = input.getInt();
-        
-        System.out.println("Address: ");
-        String address = input.getLine();
-        
+        String name = input.getLine("Name");
+        int birthYear = input.getInt("Birth year");
+        String address = input.getLine("Address");
         while(true){
-            System.out.println("What kind of swimmer?");
-            System.out.println("0: Exit");
-            System.out.println("1: Exercise");
-            System.out.println("2: Competitive");
+            if(chooseSwimType(name, birthYear, address))
+        }
+    }
+
+    private Boolean chooseSwimType(String name, int birthYear, String address){
+            String[] options = {"What kind of swimmer?", "Exercise", "Competitive"};
+            printOptions(options);
             int selection = input.getInt();
-        
             if(selection == 1){
                 db.addMember(new Member(name, birthYear, address));
-                break;
+                return true;
             } else if ( selection == 2){
                 // db.addCS(new CompetitiveSwimmer(name, birthYear, address));
-                break;
-            } else if (selection == 0){
-                break;
+                return true;
+            } else if (selection == 0) {
+                return true;
             } else {
-                System.out.println("Wrong selection, try again.");
+                System.out.println("No member added, try again.");
+                return false;
             }
-        }
     }
 
     private void editMember(){
