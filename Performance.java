@@ -12,6 +12,7 @@ public class Performance
         this.location = location;
         this.time = time;
         this.dicipline = dicipline;
+        this.name = name;
         this.age = age;
     }
 
@@ -43,7 +44,7 @@ public class Performance
     @Override
     public String toString()
     {
-        return "sted: " + " " + location + " " + "Tid: " + " " + time + "Diciplin: " + " " + dicipline;
+        return "Navn: " + name + " " + "alder: " + age + " " + "Tid: " + " " + time + "Diciplin: " + " " + dicipline;
+     "sted: " + " " + location;
     }
-
 }
