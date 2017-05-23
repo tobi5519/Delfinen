@@ -37,13 +37,13 @@ public class Menu{
             case 0: 
                 return null;
             case 1:
-                addMemberMenu();
+                addMember();
                 break;
             case 2:
-                db.editMember(db.pickMember());
+                //edit
                 break;
             case 3:
-                db.deleteMember(db.pickMember());
+                //delete
                 break;
             default: 
         }
@@ -57,7 +57,7 @@ public class Menu{
             case 0: 
                 return null;
             case 1:
-                db.pickCS().addPerformance();
+                //add performance
                 break;
             default: 
         }
@@ -97,9 +97,6 @@ public class Menu{
                 case "coachMenu":
                     running = coachMenu();
                     break;
-                case "addMember":
-                    running = addMember();
-                break;
             }
         }
     }
@@ -112,7 +109,9 @@ public class Menu{
         int birthYear = input.getInt("Birth year");
         String address = input.getLine("Address");
         while(true){
-            if(chooseSwimType(name, birthYear, address))
+            if(chooseSwimType(name, birthYear, address)){
+                break;
+            }
         }
     }
 
@@ -127,6 +126,7 @@ public class Menu{
                 // db.addCS(new CompetitiveSwimmer(name, birthYear, address));
                 return true;
             } else if (selection == 0) {
+                System.out.println("Exiting, no member added.");
                 return true;
             } else {
                 System.out.println("No member added, try again.");
@@ -135,7 +135,8 @@ public class Menu{
     }
 
     private void editMember(){
-            db.findMember();
+            System.out.println("What member would you like to edit?");
+            db.findMember(input.getLine("Name"));
     }
 
 // NEEDS USING
