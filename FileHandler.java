@@ -4,7 +4,7 @@ import java.io.*;
 public class FileHandler
 {
 
-  // Read members from file members.ser
+  // Read members from file Members.ser
 	public ArrayList<Member> ReadMembers()
 	{    
       ArrayList<Member> members = null;
@@ -12,7 +12,7 @@ public class FileHandler
     	try
     	{
 
-        FileInputStream fileIn = new FileInputStream("members.ser");
+        FileInputStream fileIn = new FileInputStream("Members.ser");
         ObjectInputStream in = new ObjectInputStream(fileIn);
         members = (ArrayList<Member>) in.readObject();
 
@@ -27,12 +27,12 @@ public class FileHandler
       return members;
 	}
 
-  // Write to file members.ser
+  // Write to file Members.ser
 	public void WriteToMembers(ArrayList<Member> members)
 	{
     try 
     {
-      FileOutputStream fileOut = new FileOutputStream("members.ser");
+      FileOutputStream fileOut = new FileOutputStream("Members.ser");
       ObjectOutputStream out = new ObjectOutputStream(fileOut);
       out.writeObject(members);
       out.close();
