@@ -7,11 +7,12 @@ public class Member
     private boolean memberStatus;
     private boolean paymentStatus;
 
-    public Member(String name, int age, String residence)
+    public Member(String name, int age, String residence, int id)
     {
         this.name = name;
         this.age = age;
         this.residence = residence;
+        this.id = id;
     }
 
 
