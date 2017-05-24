@@ -2,9 +2,13 @@ public class Menu{
     private UserInput input = new UserInput();
     private Database db = new Database();
 
+    // Starter method ----------------------------------------------------------------------
+
     public void start(){
         menuRunner("mainMenu");
     }
+
+    // MENUS -------------------------------------------------------------------------------
 
     private Boolean mainMenu(){
         String[] menuOptions = {"Main Menu","Accountant Menu","Chairman Menu","Coach Menu"};
@@ -33,13 +37,13 @@ public class Menu{
             case 0: 
                 return null;
             case 1:
-                addMemberMenu();
+                addMember();
                 break;
             case 2:
-                editMemberMenu();
+                //edit
                 break;
             case 3:
-                removeMemberMenu();
+                //delete
                 break;
             default: 
         }
@@ -47,14 +51,13 @@ public class Menu{
     }
 
     private Boolean coachMenu(){
+        String[] menuOptions = {"Coach Menu","Add Performance"};
+        printOptions(menuOptions);
         switch(input.getInt()){
-             case 0: 
+            case 0: 
                 return null;
             case 1:
-                break;
-            case 2:
-                break;
-            case 3:
+                //add performance
                 break;
             default: 
         }
@@ -62,26 +65,19 @@ public class Menu{
     }
 
     private Boolean accountantMenu(){
-        switch(input.getInt()){
-            case 0: 
-                return null;
-            case 1:
-                return true;
-            case 2:
-                return true;
-            case 3:
-                return true;
-            default: 
-                return true;
-        }
+        System.out.println("Now viewing members with a due payment!");
+        db.printDueMembers();
+        return true;
     }
+
+    // Utility methods -------------------------------------------------------------------------------
 
     private void printOptions(String[] options){
         System.out.println(options[0]);
         System.out.println("Options:");
         System.out.println("0: Go back/exit.");
         for(int i = 1; i < options.length; i++){
-            System.out.println(i + options[i]);
+            System.out.println(i + ": " + options[i]);
         }
     }
 
@@ -105,44 +101,56 @@ public class Menu{
         }
     }
 
-    private void addMemberMenu(){
-        System.out.println("Adding new member.");
+    // Actions MÅSKE skal alt dette være i de enkelte klasser?   ---------
 
-        System.out.println("Name: ");
-        String name = input.getLine();
-        
-        System.out.println("Birthyear: ");
-        int birthYear = input.getInt();
-        
-        System.out.println("Address: ");
-        String address = input.getLine();
-        
+    private void addMember(){
+        System.out.println("Adding new member.");
+        String name = input.getLine("Name");
+        int birthYear = input.getInt("Birth year");
+        String address = input.getLine("Address");
         while(true){
-            System.out.println("What kind of swimmer?");
-            System.out.println("0: Exit");
-            System.out.println("1: Exercise");
-            System.out.println("2: Competitive");
-            int selection = input.getInt();
-        
-            if(selection == 1){
-                db.addMember(new Member(name, birthYear, address));
+            if(chooseSwimType(name, birthYear, address)){
                 break;
-            } else if ( selection == 2){
-                // db.addCS(new CompetitiveSwimmer(name, birthYear, address));
-                break;
-            } else if (selection == 0){
-                break;
-            } else {
-                System.out.println("Wrong selection, try again.");
             }
         }
     }
 
-    private void editMemberMenu(){
-
+    private Boolean chooseSwimType(String name, int birthYear, String address){
+            String[] options = {"What kind of swimmer?", "Exercise", "Competitive"};
+            printOptions(options);
+            int selection = input.getInt();
+            if(selection == 1){
+                db.addMember(new Member(name, birthYear, address));
+                return true;
+            } else if ( selection == 2){
+                // db.addCS(new CompetitiveSwimmer(name, birthYear, address));
+                return true;
+            } else if (selection == 0) {
+                System.out.println("Exiting, no member added.");
+                return true;
+            } else {
+                System.out.println("No member added, try again.");
+                return false;
+            }
     }
 
-    private void removeMemberMenu(){
+    private void editMember(){
+            System.out.println("What member would you like to edit?");
+            db.findMember(input.getLine("Name"));
+    }
+
+// NEEDS USING
+    private void memberPropertyMenu(){
+        String[] options = {"What would you like to edit?", 
+                            "Name", 
+                            "Birthyear", 
+                            "Residence", 
+                            "Membership status (Active/Passive)"};
+        printOptions(options);
+    }
+
+    private void deleteMember(){
+        db.deleteMember(db.findMember());
         
     }
 }

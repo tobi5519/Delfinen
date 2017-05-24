@@ -9,6 +9,11 @@ public class UserInput {
     public String getLine(){
         return scanner.nextLine();
     }
+    
+    public String getLine(String prompt){
+        System.out.println(prompt + ": ");
+        return scanner.nextLine();
+    }
 
     public String getWord(){
         return scanner.next();
@@ -19,13 +24,25 @@ public class UserInput {
     }
     
     public int getInt(){
-        try{
-        int integer = Integer.parseInt(scanner.nextLine());
-        return integer;
-        } catch (NumberFormatException e){
-            System.out.println(">> ikke et tal returnere -1 index out of bounds sikkert: " + e);
+        while(true){
+            try{
+                int integer = Integer.parseInt(scanner.nextLine());
+                return integer;
+            } catch (NumberFormatException e){
+                System.out.println(">> ikke et tal.");
+            }
         }
-        return -1;
     }
 
+    public int getInt(String prompt){
+        while(true){
+            try{
+                System.out.println(prompt + ": ");
+                int integer = Integer.parseInt(scanner.nextLine());
+                return integer;
+            } catch (NumberFormatException e){
+                System.out.println(">> ikke et tal, try again.");
+            }
+        }
+    }
 }

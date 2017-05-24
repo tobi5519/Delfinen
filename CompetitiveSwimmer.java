@@ -16,9 +16,9 @@ public class CompetitiveSwimmer extends Member
           return performances;
      }
 
-     public void addPerformance(String location, long time, String dicipline, String name, int age)
+     public void addPerformance(String location, long time, String dicipline)
      {
-         performances.add(new Performance(location, time, dicipline, name, age));
+         performances.add(new Performance(location, time, dicipline, this.getName(), this.getAge()));
      }
 
      
