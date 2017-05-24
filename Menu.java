@@ -123,10 +123,10 @@ public class Menu{
             printOptions(options);
             int selection = input.getInt();
             if(selection == 1){
-                db.addMember(new Member(name, birthYear, address));
+                db.addMember(name, birthYear, address);
                 return true;
             } else if ( selection == 2){
-                db.addCompetitiveSwimmer(new CompetitiveSwimmer(name, birthYear, address));
+                db.addCompetitiveSwimmer(name, birthYear, address);
                 return true;
             } else if (selection == 0) {
                 System.out.println("Exiting, no member added.");
@@ -262,9 +262,9 @@ public class Menu{
         if(dicipline != null){
             location = input.getLine("Location");
             time = input.getLong("Time in seconds");
-            Member placeholder = null;
+            CompetitiveSwimmer placeholder = null;
             while(placeholder == null){
-                placeholder = chooseMember("add the performance to");
+                placeholder = chooseCompetitiveSwimmer("add the performance to");
                 if(placeholder == null){
                     if(input.getLine("Not a member, try again?").toLowerCase().contains("n")){
                         break;
