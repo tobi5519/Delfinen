@@ -45,4 +45,16 @@ public class UserInput {
             }
         }
     }
+
+    public long getLong(String prompt){
+        while(true){
+            try{
+                System.out.println(prompt + ": ");
+                long number = Long.parseLong(scanner.nextLine());
+                return number;
+            } catch (NumberFormatException e){
+                System.out.println(">> ikke et tal, try again.");
+            }
+        }
+    }
 }
