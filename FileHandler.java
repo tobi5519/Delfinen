@@ -5,7 +5,7 @@ public class FileHandler
 {
 
   // Read members from file Members.ser
-	public ArrayList<Member> ReadMembers()
+	public ArrayList<Member> readMembers()
 	{    
       ArrayList<Member> members = null;
       
@@ -28,7 +28,7 @@ public class FileHandler
 	}
 
   // Write to file Members.ser
-	public void WriteToMembers(ArrayList<Member> members)
+	public void writeToMembers(ArrayList<Member> members)
 	{
     try 
     {
@@ -47,7 +47,7 @@ public class FileHandler
 	}
 
   // Read from file CompetitiveSwimmers.ser
-  public ArrayList<CompetetiveSwimmer> ReadCompetetiveSwimmers()
+  public ArrayList<CompetetiveSwimmer> readCompetetiveSwimmers()
   {    
       ArrayList<CompetetiveSwimmer> competetiveSwimmers = null;
       
@@ -70,7 +70,7 @@ public class FileHandler
   }
 
   // Write to file CompetetiveSwimmers.ser
-  public void WriteToCompetetiveSwimmers(ArrayList<CompetetiveSwimmer> competetiveSwimmers)
+  public void writeToCompetetiveSwimmers(ArrayList<CompetetiveSwimmer> competetiveSwimmers)
   {
     try 
     {
