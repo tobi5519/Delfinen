@@ -1,3 +1,5 @@
+import java.io.*;
+
 public class Member implements Serializable 
 {
     private String name;

@@ -4,13 +4,13 @@ public class Database
 {
 	FileHandler fh = new FileHandler();
 
-	private ArrayList<Member> members = fh.ReadMembers();
-	private ArrayList<CompetitiveSwimmer> competitiveSwimmers = fh.ReadCompetetiveSwimmers();
+	private ArrayList<Member> members = fh.readMembers();
+	private ArrayList<CompetitiveSwimmer> competitiveSwimmers = fh.readCompetitiveSwimmers();
 	
 	public void save()
 	{
-		fh.WriteToMembers(members);
-		fh.WriteToCompetetiveSwimmers(competitiveSwimmers);
+		fh.writeToMembers(members);
+		fh.writeToCompetitiveSwimmers(competitiveSwimmers);
 	}
 	
 	public void printDueMembers()
@@ -199,13 +199,14 @@ public class Database
 		return arraylist;
 	}
 		
-	public void addMember(Member member)
+	public void addMember(String name, int age, String residence)
 	{
-		members.add(member);
+		members.add(new Member(name, age, residence, members.size()+competitiveSwimmers.size()));
 	}
-	public void addCompetitiveSwimmer(CompetitiveSwimmer cs)
+	public void addCompetitiveSwimmer(String name, int age, String residence)
 	{
-		competitiveSwimmers.add(cs);
+		competitiveSwimmers.add(new CompetitiveSwimmer(name, age, residence, 
+		members.size() + competitiveSwimmers.size()));
 	}
 		
 	public int[] findMember(String name)

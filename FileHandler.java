@@ -47,16 +47,16 @@ public class FileHandler implements Serializable
 	}
 
   // Read from file CompetitiveSwimmers.ser
-  public ArrayList<CompetetiveSwimmer> readCompetetiveSwimmers()
+  public ArrayList<CompetitiveSwimmer> readCompetitiveSwimmers()
   {    
-      ArrayList<CompetetiveSwimmer> competetiveSwimmers = null;
+      ArrayList<CompetitiveSwimmer> CompetitiveSwimmers = null;
       
       try
       {
 
-        FileInputStream fileIn = new FileInputStream("CompetetiveSwimmers.ser");
+        FileInputStream fileIn = new FileInputStream("CompetitiveSwimmers.ser");
         ObjectInputStream in = new ObjectInputStream(fileIn);
-        competetiveSwimmers = (ArrayList<CompetetiveSwimmer>) in.readObject();
+        CompetitiveSwimmers = (ArrayList<CompetitiveSwimmer>) in.readObject();
 
         in.close();
         fileIn.close();
@@ -64,19 +64,19 @@ public class FileHandler implements Serializable
       }
       catch (Exception e)
       {
-          System.out.println("CompetetiveSwimmers not found");
+          System.out.println("CompetitiveSwimmers not found");
       }
-      return competetiveSwimmers;
+      return CompetitiveSwimmers;
   }
 
-  // Write to file CompetetiveSwimmers.ser
-  public void writeToCompetetiveSwimmers(ArrayList<CompetetiveSwimmer> competetiveSwimmers)
+  // Write to file CompetitiveSwimmers.ser
+  public void writeToCompetitiveSwimmers(ArrayList<CompetitiveSwimmer> CompetitiveSwimmers)
   {
     try 
     {
-      FileOutputStream fileOut = new FileOutputStream("CompetetiveSwimmers.ser");
+      FileOutputStream fileOut = new FileOutputStream("CompetitiveSwimmers.ser");
       ObjectOutputStream out = new ObjectOutputStream(fileOut);
-      out.writeObject(competetiveSwimmers);
+      out.writeObject(CompetitiveSwimmers);
       out.close();
       fileOut.close();
 
