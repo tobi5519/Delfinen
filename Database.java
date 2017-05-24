@@ -2,9 +2,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 public class Database
 {
-	private ArrayList<Member> members = new ArrayList<Member>();
-	private ArrayList<CompetitiveSwimmer> competitiveSwimmers = new ArrayList<CompetitiveSwimmer>();
+	FileHandler fh = new FileHandler();
+
+	private ArrayList<Member> members = fh.ReadMembers();
+	private ArrayList<CompetitiveSwimmer> competitiveSwimmers = fh.ReadCompetetiveSwimmers();
+
+	// private ArrayList<Member> members = new ArrayList<Member>();
+	// private ArrayList<CompetitiveSwimmer> competitiveSwimmers = new ArrayList<CompetitiveSwimmer>();
 	
+	public void save()
+	{
+		fh.WriteToMembers(members);
+		fh.WriteToCompetetiveSwimmers(competetiveSwimmers);
+	}
+	
+	
+
 	public void printDueMembers()
 	{
 		for(Member m : members)
