@@ -271,6 +271,9 @@ public class Menu{
                     }
                 } else {
                     placeholder.addPerformance(location, time, dicipline);
+                    int sec = time%60;
+                    int min = time/60;
+                    System.out.println(dicipline + " performance; "+ min + ":" + sec +" in " + location + " added to " + placeholder.getName() + "'s records.");
                 }
             }
         }

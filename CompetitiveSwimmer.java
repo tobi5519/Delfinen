@@ -6,9 +6,9 @@ public class CompetitiveSwimmer extends Member
     private ArrayList<Performance> performances = new ArrayList<Performance>();
 
     
-    public CompetitiveSwimmer(String name, int birthyear, String residence)
+    public CompetitiveSwimmer(String name, int birthyear, String residence, int id)
     {
-        super(name, birthyear, residence); 
+        super(name, birthyear, residence, id); 
     }
     
      public ArrayList<Performance> getPerformances()

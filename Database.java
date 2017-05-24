@@ -13,7 +13,7 @@ public class Database
 	public void save()
 	{
 		fh.WriteToMembers(members);
-		fh.WriteToCompetetiveSwimmers(competetiveSwimmers);
+		fh.WriteToCompetetiveSwimmers(competitiveSwimmers);
 	}
 	
 	
