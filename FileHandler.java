@@ -1,7 +1,7 @@
 import java.util.*;
 import java.text.*;
 import java.io.*;
-public class FileHandler
+public class FileHandler implements Serializable 
 {
 
   // Read members from file Members.ser
