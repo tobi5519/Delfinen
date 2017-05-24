@@ -6,9 +6,6 @@ public class Database
 
 	private ArrayList<Member> members = fh.ReadMembers();
 	private ArrayList<CompetitiveSwimmer> competitiveSwimmers = fh.ReadCompetetiveSwimmers();
-
-	// private ArrayList<Member> members = new ArrayList<Member>();
-	// private ArrayList<CompetitiveSwimmer> competitiveSwimmers = new ArrayList<CompetitiveSwimmer>();
 	
 	public void save()
 	{
@@ -16,8 +13,6 @@ public class Database
 		fh.WriteToCompetetiveSwimmers(competitiveSwimmers);
 	}
 	
-	
-
 	public void printDueMembers()
 	{
 		for(Member m : members)
@@ -113,8 +108,7 @@ public class Database
 		return allPerformances;
 		
 	}
-	
-	
+		
 	public void printTopFive()
 	{
 		ArrayList<Performance> performances = getAllPerformances();
@@ -204,9 +198,7 @@ public class Database
 		}
 		return arraylist;
 	}
-	
-	
-	
+		
 	public void addMember(Member member)
 	{
 		members.add(member);
@@ -245,8 +237,6 @@ public class Database
 		a[0] = -1;
 		return a;
 	}
-
-
 	
 	public void deleteMember(int memberindex)
 	{
