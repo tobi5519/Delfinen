@@ -40,10 +40,10 @@ public class Menu{
                 addMember();
                 break;
             case 2:
-                editMember();
+                editMember(chooseMember("edit"));
                 break;
             case 3:
-                //delete
+                deleteMember(chooseMember("delete"));
                 break;
             default: 
         }
@@ -134,32 +134,56 @@ public class Menu{
             }
     }
 
-    private void editMember(){
-            System.out.println("What member would you like to edit?");
+    private Member chooseMember(String actionToDo){
+            System.out.println("What member would you like to " + actionToDo + "?");
             int[] memberIndex = db.findMember(input.getLine("Name"));
             Member placeholder = null;
             if(memberIndex[0] == 0){
                 placeholder = db.getMember(memberIndex[1]);
             } else if (memberIndex[0] == 1){
-                System.out.println("Adding competitive swimmer");
                 placeholder = db.getCompetitiveSwimmer(memberIndex[1]);
             } else if (memberIndex[0] == -1){
                 System.out.println("Member not found");
             }
+            return placeholder;
+    }
 
-
-
+    private void editMember(Member placeholder){
             if(placeholder != null){
                 Boolean running = true;
                 while(running){
-                    switch(chooseProperty(
+                    switch( chooseProperty(
                             placeholder.getName(), 
                             placeholder.getAge(), 
                             placeholder.getResidence(), 
-                            placeholder.getMemberStatus()))
+                            placeholder.getMemberStatus()) ) 
                             {
                                 case 0:
-                                break;
+                                    running = false;
+                                    break;
+                                //name
+                                case 1:
+                                    placeholder.setName(input.getLine("Name"));
+                                    break;
+                                //age
+                                case 2:    
+                                    int birthYear = 2017 - input.getInt("Age");
+                                    placeholder.setAge(birthYear);
+                                    break;
+                                //residence
+                                case 3:    
+                                    placeholder.setResidence(input.getLine("Residence/Address"));
+                                    break;
+                                //membership
+                                case 4:    
+                                    if(placeholder.getMemberStatus() == true){
+                                        placeholder.setMemberStatus(false);
+                                        System.out.println("Setting membership to Passive..");
+                                    } else {
+                                        placeholder.setMemberStatus(true);
+                                        System.out.println("Setting membership to Active..");
+                                    }
+                                    break;
                     }
                 }
                 
@@ -167,15 +191,15 @@ public class Menu{
 
     }
 
-// NEEDS USING
-    private int chooseProperty(String name, int age, String residence, Boolean membership){
+    private int chooseProperty(String name, int birthYear, String residence, Boolean membership){
         String membershipTitle = "Passive";
         if(membership){
             membershipTitle = "Active";
         }
+        int age = 2017 - birthYear;
         String[] options = {"What would you like to edit?", 
                             "Name: " + name, 
-                            "Birthyear: " + age, 
+                            "Age: " + age, 
                             "Residence: " + residence, 
                             "Membership status (Active/Passive): " + membershipTitle};
         printOptions(options);
@@ -183,8 +207,17 @@ public class Menu{
     }
     
 
-    private void deleteMember(){
-        // db.findMember(input.getLine())
-        // db.deleteMember();
+    private void deleteMember(Member placeholder){
+        if(placeholder != null){
+            String delete = "Do you want to delete " + placeholder.getName() + " (y/n)?";
+            if(input.getLine(delete).toLowerCase().contains("y")){
+                int[] location = db.findMember(placeholder.getName());
+                if(location[0] == 0){
+                    db.deleteMember(location[1]);
+                } else if (location[0] == 1){
+                    db.deleteCompetitiveSwimmer(location[1]);
+                }
+            }
+        }
     }
 }
