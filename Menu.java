@@ -11,10 +11,10 @@ public class Menu{
     // MENUS -------------------------------------------------------------------------------
 
     private Boolean mainMenu(){
-        String[] menuOptions = {"Main Menu",
-                                "Chairman Menu",
-                                "View members with a due payment",
-                                "Coach Menu"};
+        String[] menuOptions = {"Main menu",
+                                "Chairman's menu",
+                                "Treasurer's menu",
+                                "Coach's menu"};
         printOptions(menuOptions);
         switch(input.getInt()){
             case 0: 
@@ -37,20 +37,24 @@ public class Menu{
     }
 
     private Boolean chairmanMenu(){
-        db.printMembers();
-        System.out.println("============================");
-        String[] menuOptions = {"Chairman Menu","Add Member","Edit member","Remove Member"};
+        String[] menuOptions = {"Chairman Menu","View all members","Add Member","Edit member","Remove Member"};
         printOptions(menuOptions);
         switch(input.getInt()){
             case 0: 
                 return false;
             case 1:
-                addMember();
+                cls();
+                db.printMembers();
+                System.out.println("============================");
+                input.waitForEnter();
                 break;
             case 2:
-                editMember(chooseMember("edit"));
+                addMember();
                 break;
             case 3:
+                editMember(chooseMember("edit"));
+                break;
+            case 4:
                 deleteMember(chooseMember("delete"));
                 break;
             default: 

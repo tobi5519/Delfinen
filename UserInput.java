@@ -34,7 +34,7 @@ public class UserInput {
                 int integer = Integer.parseInt(scanner.nextLine());
                 return integer;
             } catch (NumberFormatException e){
-                System.out.println(">> ikke et tal.");
+                System.out.println(">> Not a number, try again.");
             }
         }
     }
@@ -46,7 +46,7 @@ public class UserInput {
                 int integer = Integer.parseInt(scanner.nextLine());
                 return integer;
             } catch (NumberFormatException e){
-                System.out.println(">> ikke et tal, try again.");
+                System.out.println(">> Not a number, try again.");
             }
         }
     }
@@ -58,7 +58,7 @@ public class UserInput {
                 long number = Long.parseLong(scanner.nextLine());
                 return number;
             } catch (NumberFormatException e){
-                System.out.println(">> ikke et tal, try again.");
+                System.out.println(">> Not a number, try again.");
             }
         }
     }
