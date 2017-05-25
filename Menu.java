@@ -18,6 +18,9 @@ public class Menu{
         printOptions(menuOptions);
         switch(input.getInt()){
             case 0: 
+                db.save();
+                cls();
+                System.out.println("All changes saved.. \nExiting.");
                 return false;
             case 1:
                 menuRunner("chairmanMenu");
@@ -34,6 +37,8 @@ public class Menu{
     }
 
     private Boolean chairmanMenu(){
+        db.printMembers();
+        System.out.println("============================");
         String[] menuOptions = {"Chairman Menu","Add Member","Edit member","Remove Member"};
         printOptions(menuOptions);
         switch(input.getInt()){
@@ -54,13 +59,18 @@ public class Menu{
     }
 
     private Boolean coachMenu(){
-        String[] menuOptions = {"Coach Menu","Add Performance"};
+        String[] menuOptions = {"Coach Menu","Add Performance", "Print top 5"};
         printOptions(menuOptions);
         switch(input.getInt()){
             case 0: 
                 return false;
             case 1:
-                //add performance
+                addPerformance();
+                input.waitForEnter();
+                break;
+            case 2:
+                db.printTopFive();
+                input.waitForEnter();
                 break;
             default: 
         }
@@ -70,6 +80,7 @@ public class Menu{
     private Boolean accountantMenu(){
         System.out.println("Now viewing members with a due payment!");
         db.printDueMembers();
+        input.waitForEnter();
         return false;
     }
 
@@ -87,6 +98,7 @@ public class Menu{
     private void menuRunner(String method){
         Boolean running = true;
         while(running){
+            cls();
             switch(method){
                 case "chairmanMenu":
                     running = chairmanMenu();
@@ -109,24 +121,30 @@ public class Menu{
     private void addMember(){
         System.out.println("Adding new member.");
         String name = input.getLine("Name");
-        int birthYear = input.getInt("Birth year");
+        int age = input.getInt("Age");
         String address = input.getLine("Address");
         while(true){
-            if(chooseSwimType(name, birthYear, address)){
+            if(chooseSwimType(name, age, address)){
                 break;
             }
         }
     }
 
-    private Boolean chooseSwimType(String name, int birthYear, String address){
-            String[] options = {"What kind of swimmer?", "Exercise", "Competitive"};
+    private Boolean chooseSwimType(String name, int age, String address){
+            String[] options = {"What kind of swimmer?", "Exercise", "Competitive", "Exercise not payed", "Competitive not payed"};
             printOptions(options);
             int selection = input.getInt();
             if(selection == 1){
-                db.addMember(name, birthYear, address);
+                db.addMember(name, age, address);
                 return true;
             } else if ( selection == 2){
-                db.addCompetitiveSwimmer(name, birthYear, address);
+                db.addCompetitiveSwimmer(name, age, address);
+                return true;
+            } else if ( selection == 3){
+                db.addMember(name, age, address, false);
+                return true;
+            } else if ( selection == 4){
+                db.addCompetitiveSwimmer(name, age, address, false);
                 return true;
             } else if (selection == 0) {
                 System.out.println("Exiting, no member added.");
@@ -184,8 +202,8 @@ public class Menu{
                                     break;
                                 //age
                                 case 2:    
-                                    int birthYear = 2017 - input.getInt("Age");
-                                    placeholder.setAge(birthYear);
+                                    int age = input.getInt("Age");
+                                    placeholder.setAge(age);
                                     break;
                                 //residence
                                 case 3:    
@@ -206,12 +224,11 @@ public class Menu{
             }
     }
 
-    private int chooseProperty(String name, int birthYear, String residence, Boolean membership){
+    private int chooseProperty(String name, int age, String residence, Boolean membership){
         String membershipTitle = "Passive";
         if(membership){
             membershipTitle = "Active";
         }
-        int age = 2017 - birthYear;
         String[] options = {"What would you like to edit?", 
                             "Name: " + name, 
                             "Age: " + age, 
@@ -237,7 +254,6 @@ public class Menu{
     }
 
     private void addPerformance(){
-        // public Performance(String location, long time, String dicipline, String name, int age)
         String location = null;
         String dicipline = null;
         System.out.println("Adding performance.");
@@ -273,9 +289,16 @@ public class Menu{
                     placeholder.addPerformance(location, time, dicipline);
                     long sec = time%60;
                     long min = time/60;
-                    System.out.println(dicipline + " performance; "+ min + ":" + sec +" in " + location + " added to " + placeholder.getName() + "'s records.");
+                    System.out.println(dicipline + " performance: "+ min + ":" + sec +" in " + location + " added to " + placeholder.getName() + "'s records.");
                 }
             }
         }
+    }
+
+    private void cls(){
+        for(int i = 0; i < 30; i++){
+            System.out.println();
+        }
+        System.out.println("============================");
     }
 }

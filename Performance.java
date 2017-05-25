@@ -1,4 +1,5 @@
-public class Performance
+import java.io.*;
+public class Performance implements Serializable
 {
     private String location;
     private long time;
@@ -44,7 +45,12 @@ public class Performance
     @Override
     public String toString()
     {
-        return "Navn: " + name + " " + "alder: " + age + " " + "Tid: " + " " + time + "Diciplin: " + " " + dicipline +
-     "sted: " + " " + location;
+        long min = time/60;
+        long sec = time%60;
+        String number = "";
+        if(sec < 10){
+            number = "0";
+        }
+        return "Name: " + name + " Age: " + age + " Time: " + min + ":"+ number + sec + " Discipline: " + dicipline + " Location: " + location;
     }
 }

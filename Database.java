@@ -3,9 +3,19 @@ import java.util.Collections;
 public class Database
 {
 	FileHandler fh = new FileHandler();
-
-	private ArrayList<Member> members = fh.readMembers();
-	private ArrayList<CompetitiveSwimmer> competitiveSwimmers = fh.readCompetitiveSwimmers();
+	private ArrayList<Member> members;
+	private ArrayList<CompetitiveSwimmer> competitiveSwimmers;
+	
+	public Database(){
+		competitiveSwimmers = fh.readCompetitiveSwimmers();
+		members = fh.readMembers();
+		if(fh.readMembers() == null){
+			members = new ArrayList<Member>();
+		}
+		if(fh.readCompetitiveSwimmers() == null){
+			competitiveSwimmers = new ArrayList<CompetitiveSwimmer>();
+		}
+	}
 	
 	public void save()
 	{
@@ -19,6 +29,7 @@ public class Database
 		{
 			if (m.getPaymentStatus() == false)
 			{
+				System.out.print(m.getName() + ": ");
 				if (m.getMemberStatus() == true)
 				{
 					if (m.getAge() < 18)
@@ -51,6 +62,7 @@ public class Database
 		{
 			if (cs.getPaymentStatus() == false)
 			{
+				System.out.print(cs.getName() + ": ");
 				if (cs.getMemberStatus() == true)
 				{
 					if (cs.getAge() < 18)
@@ -81,13 +93,21 @@ public class Database
 	{
 		for(Member m : members)
 		{
-			System.out.println(m.getName() + " " + m.getAge());
+			String status = "Passive";
+			if(m.getMemberStatus() == true){
+				status = "Active";
+			}
+			System.out.println(m.getName() + " " + m.getAge() + " Member " + status);
 			
 		}
 
 		for(CompetitiveSwimmer cs : competitiveSwimmers)
 		{
-			System.out.println(cs.getName() + " " + cs.getAge());
+			String status = "Passive";
+			if(cs.getMemberStatus() == true){
+				status = "Active";
+			}
+			System.out.println(cs.getName() + " " + cs.getAge() + " Competitive " + status);
 			
 		}
 
@@ -123,7 +143,7 @@ public class Database
 		{
 			if (p.getAge() < 18)
 			{
-				if(p.getDicipline().equals("butterfly"))
+				if(p.getDicipline().equals("Butterfly"))
 				{	
 					juniorButterfly.add(p);
 				}
@@ -134,7 +154,7 @@ public class Database
 			}
 			else
 			{
-				if(p.getDicipline().equals("butterfly"))
+				if(p.getDicipline().equals("Butterfly"))
 				{	
 					seniorButterfly.add(p);
 				}
@@ -150,50 +170,66 @@ public class Database
 		juniorCrawl = sort(juniorCrawl);
 		seniorButterfly = sort(seniorButterfly);
 		seniorCrawl = sort(seniorCrawl);
+
+		if(!juniorButterfly.isEmpty()){
+			System.out.println("\n= = | Junior performances in butterfly | = =");
+			for(int i = 0; i < juniorButterfly.size(); i++){
+				System.out.println(juniorButterfly.get(i));
+				if(i == 4){
+					break;
+				}
+			}
+		}
 		
-		for(Performance p : juniorButterfly)
-		{	
-			System.out.println("= = | Junior performances in butterfly | = =");
-			System.out.println(p);
+		if(!juniorCrawl.isEmpty()){	
+			System.out.println("\n= = | Junior performances in crawl | = =");
+			for(int i = 0; i < juniorCrawl.size(); i++){
+				System.out.println(juniorCrawl.get(i));
+				if(i == 4){
+					break;
+				}
+			}
 		}
-		for(Performance p : juniorCrawl)
-		{
-			System.out.println("= = | Junior performances in crawl | = =");
-			System.out.println(p);
+		
+		if(!seniorButterfly.isEmpty()){		
+			System.out.println("\n= = | Senior performances in butterfly | = =");
+			for(int i = 0; i < seniorButterfly.size(); i++){
+				System.out.println(seniorButterfly.get(i));
+				if(i == 4){
+					break;
+				}
+			}
 		}
-		for(Performance p : seniorButterfly)
-		{
-			System.out.println("= = | Senior performances in butterfly | = =");
-			System.out.println(p);
+		
+		if(!seniorCrawl.isEmpty()){
+			System.out.println("\n= = | Senior performances in crawl | = =");
+			for(int i = 0; i < seniorCrawl.size(); i++){
+				System.out.println(seniorCrawl.get(i));
+				if(i == 4){
+					break;
+				}
+			}
 		}
-		for(Performance p : seniorCrawl)
-		{
-			System.out.println("= = | Senior performances in crawl | = =");
-			System.out.println(p);
-		}
-				
 	}
 
 	public ArrayList<Performance> sort(ArrayList<Performance> arraylist)
 	{
 		if(arraylist.size() < 2)
 		{
-			return null;
+			return arraylist;
 		}
 
 		Boolean swappedLastTime = true;
 		while (swappedLastTime) 
 		{
 			swappedLastTime = false;
-			for(int i = 0;i < arraylist.size();i++)
+			for(int i = 0; i < arraylist.size() - 1;i++)
 			{
-				
 				if(arraylist.get(i).getTime() > arraylist.get(i+1).getTime())
 				{
 					Collections.swap(arraylist, i, i+1); // works without "ArrayList<Performance>"
 					swappedLastTime = true;
 				}
-
 			}
 		}
 		return arraylist;
@@ -205,8 +241,19 @@ public class Database
 	}
 	public void addCompetitiveSwimmer(String name, int age, String residence)
 	{
+		ArrayList<CompetitiveSwimmer> hej = new ArrayList<CompetitiveSwimmer>();
 		competitiveSwimmers.add(new CompetitiveSwimmer(name, age, residence, 
-		members.size() + competitiveSwimmers.size()));
+		members.size() + competitiveSwimmers.size() ));
+	}
+	public void addMember(String name, int age, String residence, boolean paymentStatus)
+	{
+		members.add(new Member(name, age, residence, members.size()+competitiveSwimmers.size(), paymentStatus));
+	}
+	public void addCompetitiveSwimmer(String name, int age, String residence, boolean paymentStatus)
+	{
+		ArrayList<CompetitiveSwimmer> hej = new ArrayList<CompetitiveSwimmer>();
+		competitiveSwimmers.add(new CompetitiveSwimmer(name, age, residence, 
+		members.size() + competitiveSwimmers.size(), paymentStatus ));
 	}
 		
 	public int[] findMember(String name)
@@ -216,7 +263,6 @@ public class Database
 		{
 			if(m.getName().equals(name))
 			{			
-				System.out.println("Hej fra member");	
 				a[0] = 0;
 				a[1] = members.indexOf(m);
 				return a;
@@ -228,7 +274,6 @@ public class Database
 		{
 			if(cs.getName().equals(name))
 			{
-				System.out.println("Hej fra cs member");	
 				a[0] = 1;
 				a[1] = competitiveSwimmers.indexOf(cs);
 				return a;

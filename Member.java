@@ -17,6 +17,14 @@ public class Member implements Serializable
         this.id = id;
     }
 
+    public Member(String name, int age, String residence, int id, boolean paymentStatus)
+    {
+        this.name = name;
+        this.age = age;
+        this.residence = residence;
+        this.id = id;
+        this.paymentStatus = paymentStatus;
+    }
 
     public void setName(String name)
     {

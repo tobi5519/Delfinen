@@ -15,6 +15,11 @@ public class UserInput {
         return scanner.nextLine();
     }
 
+    public String waitForEnter(){
+        System.out.println("Press enter to return.");
+        return scanner.nextLine();
+    }
+
     public String getWord(){
         return scanner.next();
     }

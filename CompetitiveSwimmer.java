@@ -11,6 +11,11 @@ public class CompetitiveSwimmer extends Member
         super(name, birthyear, residence, id); 
     }
     
+    public CompetitiveSwimmer(String name, int birthyear, String residence, int id, boolean paymentStatus)
+    {
+        super(name, birthyear, residence, id, paymentStatus); 
+    }
+    
      public ArrayList<Performance> getPerformances()
      {
           return performances;
