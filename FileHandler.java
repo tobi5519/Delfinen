@@ -1,10 +1,9 @@
 import java.util.*;
-import java.text.*;
 import java.io.*;
 public class FileHandler implements Serializable 
 {
 
-  // Read members from file Members.ser
+  // Read members from file Members.db
 	public ArrayList<Member> readMembers()
 	{    
       ArrayList<Member> members = null;
@@ -12,7 +11,7 @@ public class FileHandler implements Serializable
     	try
     	{
 
-        FileInputStream fileIn = new FileInputStream("Members.ser");
+        FileInputStream fileIn = new FileInputStream("Members.db");
         ObjectInputStream in = new ObjectInputStream(fileIn);
         members = (ArrayList<Member>) in.readObject();
 
@@ -27,12 +26,12 @@ public class FileHandler implements Serializable
       return members;
 	}
 
-  // Write to file Members.ser
+  // Write to file Members.db
 	public void writeToMembers(ArrayList<Member> members)
 	{
     try 
     {
-      FileOutputStream fileOut = new FileOutputStream("Members.ser");
+      FileOutputStream fileOut = new FileOutputStream("Members.db");
       ObjectOutputStream out = new ObjectOutputStream(fileOut);
       out.writeObject(members);
       out.close();
@@ -41,12 +40,11 @@ public class FileHandler implements Serializable
     }
     catch (Exception e)
     {
-      System.out.println("Doh!");
-      
+      System.out.println("Can't write to file");
     }
 	}
 
-  // Read from file CompetitiveSwimmers.ser
+  // Read from file CompetitiveSwimmers.db
   public ArrayList<CompetitiveSwimmer> readCompetitiveSwimmers()
   {    
       ArrayList<CompetitiveSwimmer> CompetitiveSwimmers = null;
@@ -54,7 +52,7 @@ public class FileHandler implements Serializable
       try
       {
 
-        FileInputStream fileIn = new FileInputStream("CompetitiveSwimmers.ser");
+        FileInputStream fileIn = new FileInputStream("CompetitiveSwimmers.db");
         ObjectInputStream in = new ObjectInputStream(fileIn);
         CompetitiveSwimmers = (ArrayList<CompetitiveSwimmer>) in.readObject();
 
@@ -69,23 +67,20 @@ public class FileHandler implements Serializable
       return CompetitiveSwimmers;
   }
 
-  // Write to file CompetitiveSwimmers.ser
-  public void writeToCompetitiveSwimmers(ArrayList<CompetitiveSwimmer> CompetitiveSwimmers)
+  // Write to file CompetitiveSwimmers.db
+  public void writeToCompetitiveSwimmers(ArrayList<CompetitiveSwimmer> competitiveSwimmers)
   {
     try 
     {
-      FileOutputStream fileOut = new FileOutputStream("CompetitiveSwimmers.ser");
+      FileOutputStream fileOut = new FileOutputStream("CompetitiveSwimmers.db");
       ObjectOutputStream out = new ObjectOutputStream(fileOut);
-      out.writeObject(CompetitiveSwimmers);
+      out.writeObject(competitiveSwimmers);
       out.close();
       fileOut.close();
-
     }
     catch (Exception e)
     {
-      System.out.println("Doh!");
-      
+      System.out.println("Can't write to file");
     }
   }
-
 }

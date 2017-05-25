@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 public class Database
 {
-	FileHandler fh = new FileHandler();
+	private FileHandler fh = new FileHandler();
 	private ArrayList<Member> members;
 	private ArrayList<CompetitiveSwimmer> competitiveSwimmers;
 	
@@ -239,16 +239,19 @@ public class Database
 	{
 		members.add(new Member(name, age, residence, members.size()+competitiveSwimmers.size()));
 	}
+
+	public void addMember(String name, int age, String residence, boolean paymentStatus)
+	{
+		members.add(new Member(name, age, residence, members.size()+competitiveSwimmers.size(), paymentStatus));
+	}
+
 	public void addCompetitiveSwimmer(String name, int age, String residence)
 	{
 		ArrayList<CompetitiveSwimmer> hej = new ArrayList<CompetitiveSwimmer>();
 		competitiveSwimmers.add(new CompetitiveSwimmer(name, age, residence, 
 		members.size() + competitiveSwimmers.size() ));
 	}
-	public void addMember(String name, int age, String residence, boolean paymentStatus)
-	{
-		members.add(new Member(name, age, residence, members.size()+competitiveSwimmers.size(), paymentStatus));
-	}
+	
 	public void addCompetitiveSwimmer(String name, int age, String residence, boolean paymentStatus)
 	{
 		ArrayList<CompetitiveSwimmer> hej = new ArrayList<CompetitiveSwimmer>();
@@ -284,24 +287,24 @@ public class Database
 		return a;
 	}
 	
-	public void deleteMember(int memberindex)
+	public void deleteMember(int memberIndex)
 	{
-		members.remove(memberindex);
+		members.remove(memberIndex);
 	}
 
-	public void deleteCompetitiveSwimmer(int memberindex)
+	public void deleteCompetitiveSwimmer(int memberIndex)
 	{
-		competitiveSwimmers.remove(memberindex);
+		competitiveSwimmers.remove(memberIndex);
 	}
 	
-	public Member getMember(int memberindex)
+	public Member getMember(int memberIndex)
 	{
-		return members.get(memberindex);
+		return members.get(memberIndex);
 		
 	}
 	
-	public CompetitiveSwimmer getCompetitiveSwimmer(int memberindex)
+	public CompetitiveSwimmer getCompetitiveSwimmer(int memberIndex)
 	{
-		return competitiveSwimmers.get(memberindex);
+		return competitiveSwimmers.get(memberIndex);
 	}	
 }

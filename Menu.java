@@ -2,13 +2,13 @@ public class Menu{
     private UserInput input = new UserInput();
     private Database db = new Database();
 
-    // Starter method ----------------------------------------------------------------------
+    // Starter method -----------
 
     public void start(){
         menuRunner("mainMenu");
     }
 
-    // MENUS -------------------------------------------------------------------------------
+    // MENUS --------------------
 
     private Boolean mainMenu(){
         String[] menuOptions = {"Main menu",
@@ -26,7 +26,7 @@ public class Menu{
                 menuRunner("chairmanMenu");
                 return true;
             case 2:
-                menuRunner("accountantMenu");
+                menuRunner("treasurerMenu");
                 return true;
             case 3:
                 menuRunner("coachMenu");
@@ -62,6 +62,13 @@ public class Menu{
         return true;
     }
 
+    private Boolean treasurerMenu(){
+        System.out.println("Now viewing members with a due payment!");
+        db.printDueMembers();
+        input.waitForEnter();
+        return false;
+    }
+
     private Boolean coachMenu(){
         String[] menuOptions = {"Coach Menu","Add Performance", "Print top 5"};
         printOptions(menuOptions);
@@ -81,14 +88,7 @@ public class Menu{
         return true;
     }
 
-    private Boolean accountantMenu(){
-        System.out.println("Now viewing members with a due payment!");
-        db.printDueMembers();
-        input.waitForEnter();
-        return false;
-    }
-
-    // Utility methods -------------------------------------------------------------------------------
+    // Utility methods ----------
 
     private void printOptions(String[] options){
         System.out.println(options[0]);
@@ -110,8 +110,8 @@ public class Menu{
                 case "mainMenu":
                     running = mainMenu();
                     break;
-                case "accountantMenu":
-                    running = accountantMenu();
+                case "treasurerMenu":
+                    running = treasurerMenu();
                     break;
                 case "coachMenu":
                     running = coachMenu();
@@ -120,71 +120,25 @@ public class Menu{
         }
     }
 
-    // Actions MÅSKE skal alt dette være i de enkelte klasser?   ---------
+    private void cls(){
+        for(int i = 0; i < 30; i++){
+            System.out.println();
+        }
+        System.out.println("============================");
+    }
+
+    // Sub Menus ----------------
 
     private void addMember(){
         System.out.println("Adding new member.");
         String name = input.getLine("Name");
         int age = input.getInt("Age");
-        String address = input.getLine("Address");
+        String residence = input.getLine("Address");
         while(true){
-            if(chooseSwimType(name, age, address)){
+            if(chooseSwimType(name, age, residence)){
                 break;
             }
         }
-    }
-
-    private Boolean chooseSwimType(String name, int age, String address){
-            String[] options = {"What kind of swimmer?", "Exercise", "Competitive", "Exercise not payed", "Competitive not payed"};
-            printOptions(options);
-            int selection = input.getInt();
-            if(selection == 1){
-                db.addMember(name, age, address);
-                return true;
-            } else if ( selection == 2){
-                db.addCompetitiveSwimmer(name, age, address);
-                return true;
-            } else if ( selection == 3){
-                db.addMember(name, age, address, false);
-                return true;
-            } else if ( selection == 4){
-                db.addCompetitiveSwimmer(name, age, address, false);
-                return true;
-            } else if (selection == 0) {
-                System.out.println("Exiting, no member added.");
-                return true;
-            } else {
-                System.out.println("No member added, try again.");
-                return false;
-            }
-    }
-
-    private Member chooseMember(String actionToDo){
-            System.out.println("What member would you like to " + actionToDo + "?");
-            int[] memberIndex = db.findMember(input.getLine("Name"));
-            Member placeholder = null;
-            if(memberIndex[0] == 0){
-                placeholder = db.getMember(memberIndex[1]);
-            } else if (memberIndex[0] == 1){
-                placeholder = db.getCompetitiveSwimmer(memberIndex[1]);
-            } else if (memberIndex[0] == -1){
-                System.out.println("Member not found");
-            }
-            return placeholder;
-    }
-
-    private CompetitiveSwimmer chooseCompetitiveSwimmer(String actionToDo){
-            System.out.println("What member would you like to " + actionToDo + "?");
-            int[] memberIndex = db.findMember(input.getLine("Name"));
-            CompetitiveSwimmer placeholder = null;
-            if(memberIndex[0] == 0){
-                System.out.println("Not a competitive swimmer");
-            } else if (memberIndex[0] == 1){
-                placeholder = db.getCompetitiveSwimmer(memberIndex[1]);
-            } else if (memberIndex[0] == -1){
-                System.out.println("Member not found");
-            }
-            return placeholder;
     }
 
     private void editMember(Member placeholder){
@@ -227,21 +181,6 @@ public class Menu{
                     }
             }
     }
-
-    private int chooseProperty(String name, int age, String residence, Boolean membership){
-        String membershipTitle = "Passive";
-        if(membership){
-            membershipTitle = "Active";
-        }
-        String[] options = {"What would you like to edit?", 
-                            "Name: " + name, 
-                            "Age: " + age, 
-                            "Residence: " + residence, 
-                            "Membership status (Active/Passive): " + membershipTitle};
-        printOptions(options);
-        return input.getInt();
-    }
-    
 
     private void deleteMember(Member placeholder){
         if(placeholder != null){
@@ -299,10 +238,72 @@ public class Menu{
         }
     }
 
-    private void cls(){
-        for(int i = 0; i < 30; i++){
-            System.out.println();
+    // Choose menus -------------
+
+    private Boolean chooseSwimType(String name, int age, String residence){
+            String[] options = {"What kind of swimmer?", "Exercise", "Competitive", "Exercise not payed", "Competitive not payed"};
+            printOptions(options);
+            int selection = input.getInt();
+            if(selection == 1){
+                db.addMember(name, age, residence);
+                return true;
+            } else if ( selection == 2){
+                db.addCompetitiveSwimmer(name, age, residence);
+                return true;
+            } else if ( selection == 3){
+                db.addMember(name, age, residence, false);
+                return true;
+            } else if ( selection == 4){
+                db.addCompetitiveSwimmer(name, age, residence, false);
+                return true;
+            } else if (selection == 0) {
+                System.out.println("Exiting, no member added.");
+                return true;
+            } else {
+                System.out.println("No member added, try again.");
+                return false;
+            }
+    }
+
+    private Member chooseMember(String actionToDo){
+            System.out.println("What member would you like to " + actionToDo + "?");
+            int[] memberIndex = db.findMember(input.getLine("Name"));
+            Member placeholder = null;
+            if(memberIndex[0] == 0){
+                placeholder = db.getMember(memberIndex[1]);
+            } else if (memberIndex[0] == 1){
+                placeholder = db.getCompetitiveSwimmer(memberIndex[1]);
+            } else if (memberIndex[0] == -1){
+                System.out.println("Member not found");
+            }
+            return placeholder;
+    }
+
+    private CompetitiveSwimmer chooseCompetitiveSwimmer(String actionToDo){
+            System.out.println("What member would you like to " + actionToDo + "?");
+            int[] memberIndex = db.findMember(input.getLine("Name"));
+            CompetitiveSwimmer placeholder = null;
+            if(memberIndex[0] == 0){
+                System.out.println("Not a competitive swimmer");
+            } else if (memberIndex[0] == 1){
+                placeholder = db.getCompetitiveSwimmer(memberIndex[1]);
+            } else if (memberIndex[0] == -1){
+                System.out.println("Member not found");
+            }
+            return placeholder;
+    }
+
+    private int chooseProperty(String name, int age, String residence, Boolean membership){
+        String membershipTitle = "Passive";
+        if(membership){
+            membershipTitle = "Active";
         }
-        System.out.println("============================");
+        String[] options = {"What would you like to edit?", 
+                            "Name: " + name, 
+                            "Age: " + age, 
+                            "Residence: " + residence, 
+                            "Membership status (Active/Passive): " + membershipTitle};
+        printOptions(options);
+        return input.getInt();
     }
 }
