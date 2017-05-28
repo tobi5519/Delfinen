@@ -227,7 +227,7 @@ public class Database
 			{
 				if(arraylist.get(i).getTime() > arraylist.get(i+1).getTime())
 				{
-					Collections.swap(arraylist, i, i+1); // works without "ArrayList<Performance>"
+					Collections.swap(arraylist, i, i+1);
 					swappedLastTime = true;
 				}
 			}

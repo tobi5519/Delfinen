@@ -47,14 +47,14 @@ public class FileHandler implements Serializable
   // Read from file CompetitiveSwimmers.db
   public ArrayList<CompetitiveSwimmer> readCompetitiveSwimmers()
   {    
-      ArrayList<CompetitiveSwimmer> CompetitiveSwimmers = null;
+      ArrayList<CompetitiveSwimmer> competitiveSwimmers = null;
       
       try
       {
 
         FileInputStream fileIn = new FileInputStream("CompetitiveSwimmers.db");
         ObjectInputStream in = new ObjectInputStream(fileIn);
-        CompetitiveSwimmers = (ArrayList<CompetitiveSwimmer>) in.readObject();
+        competitiveSwimmers = (ArrayList<CompetitiveSwimmer>) in.readObject();
 
         in.close();
         fileIn.close();
@@ -64,7 +64,7 @@ public class FileHandler implements Serializable
       {
           System.out.println("CompetitiveSwimmers not found");
       }
-      return CompetitiveSwimmers;
+      return competitiveSwimmers;
   }
 
   // Write to file CompetitiveSwimmers.db
